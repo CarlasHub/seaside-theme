@@ -144,6 +144,7 @@ add_action( 'widgets_init', 'seaside_widgets_init' );
  */
 function seaside_scripts() {
 	wp_enqueue_style( 'seaside-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_enqueue_style( 'seaside-style', get_stylesheet_uri(). '/css/style.css' );
 	wp_style_add_data( 'seaside-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'seaside-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
@@ -153,6 +154,15 @@ function seaside_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'seaside_scripts' );
+
+//show template 
+
+function define_current_theme_file( $template ) {
+    $GLOBALS['current_theme_template'] = basename($template);
+
+    return $template;
+}
+add_action('template_include', 'define_current_theme_file', 1000);
 
 /**
  * Implement the Custom Header feature.

@@ -26,6 +26,7 @@
 				?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
+	<h2><?php echo $GLOBALS['current_theme_template']; ?></h2>
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
