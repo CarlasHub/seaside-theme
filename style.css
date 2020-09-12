@@ -1,6 +1,6 @@
 /*!
 Theme Name: seaside
-Theme URI: http://underscores.me/
+Theme URI: http://carlashub.com/
 Author: CarlasHub
 Author URI: http://carlashub.com/
 Description: Description
@@ -67,6 +67,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /* Document
 	 ========================================================================== */
 
+@import 'css/style.css';
 
 /**
  * 1. Correct the line height in all browsers.
@@ -625,7 +626,8 @@ a {
 }
 
 a:visited {
-    color: #800080;
+    color: lightgrey;
+    opacity: 0.6;
 }
 
 a:hover,
@@ -1082,8 +1084,4 @@ textarea {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1.5em;
-}
-
-.site-title a {
-    color: green;
 }

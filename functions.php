@@ -53,7 +53,20 @@ if ( ! function_exists( 'seaside_setup' ) ) :
 				'menu-1' => esc_html__( 'Primary', 'seaside' ),
 			)
 		);
-
+		/**
+		 * Register Custom Navigation Walker
+		 */
+		function register_navwalker(){
+			require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+		}
+		add_action( 'after_setup_theme', 'register_navwalker' );
+		if ( ! file_exists( get_template_directory() . '/class-wp-bootstrap-navwalker.php' ) ) {
+			// File does not exist... return an error.
+			return new WP_Error( 'class-wp-bootstrap-navwalker-missing', __( 'It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker' ) );
+		} else {
+			// File exists... require it.
+			require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+		}
 		/*
 		 * Switch default core markup for search form, comment form, and comments
 		 * to output valid HTML5.
@@ -139,19 +152,44 @@ function seaside_widgets_init() {
 }
 add_action( 'widgets_init', 'seaside_widgets_init' );
 
+
+
+
 /**
  * Enqueue scripts and styles.
  */
 function seaside_scripts() {
+	wp_enqueue_style('bootstrap', get_template_directory_uri() . '/vendor/bootstrap/css/bootstrap.min.css');
+	wp_enqueue_style('icofont', get_template_directory_uri() . '/vendor/icofont/icofont.min.css');
+	wp_enqueue_style('boxicons', get_template_directory_uri() . '/vendor/boxicons/css/boxicons.min.css');
+	wp_enqueue_style('venobox', get_template_directory_uri() . '/vendor/venobox/venobox.css');
+	wp_enqueue_style('owlcarousel', get_template_directory_uri() . '/vendor/owl.carousel/assets/owl.carousel.min.css');
+	wp_enqueue_style('aos', get_template_directory_uri() . '/vendor/aos/aos.css');
+
 	wp_enqueue_style( 'seaside-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_enqueue_style( 'seaside-style', get_stylesheet_uri(). '/css/style.css' );
+
+	
 	wp_style_add_data( 'seaside-style', 'rtl', 'replace' );
 
+
+	//scripts
+	wp_enqueue_script( 'jquery', get_template_directory_uri() . '/vendor/jquery/jquery.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'bootstrapscript', get_template_directory_uri() . '/vendor/bootstrap/js/bootstrap.bundle.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'jqueryeasing', get_template_directory_uri() . '/vendor/jquery.easing/jquery.easing.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'phpemail', get_template_directory_uri() . '/vendor/php-email-form/validate.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'waypointsjquery', get_template_directory_uri() . '/vendor/waypoints/jquery.waypoints.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'counterup', get_template_directory_uri() . '/vendor/counterup/counterup.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'isotope-layout', get_template_directory_uri() . '/vendor/isotope-layout/isotope.pkgd.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'venoboxScript', get_template_directory_uri() . '/vendor/venobox/venobox.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'owl-carousel', get_template_directory_uri() . '/vendor/owl.carousel/owl.carousel.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'aosJs', get_template_directory_uri() . '/vendor/aos/aos.js', array(), _S_VERSION, true );
+	
 	wp_enqueue_script( 'seaside-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
 }
 add_action( 'wp_enqueue_scripts', 'seaside_scripts' );
 
