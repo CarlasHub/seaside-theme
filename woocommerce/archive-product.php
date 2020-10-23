@@ -67,7 +67,10 @@ get_header( 'shop' );
 			?>
 		</div><!-- /shop sidebar -->
 		<div class="col-8">	
-			<div class="d-flex">	
+			<!-- <div class="d-flex">	 -->
+
+			<section id="portfolio" class="portfolio">
+      			<div class="container">
 				<?php
 					if ( woocommerce_product_loop() ) {
 
@@ -83,12 +86,96 @@ get_header( 'shop' );
 				</div>
 				<?php
 
+
+                    // Only run on shop archive pages, not single products or other pages
+                    if ( is_shop() || is_product_category() || is_product_tag() ) {
+                        // Products per page
+                        $per_page = 24;
+                        if ( get_query_var( 'taxonomy' ) ) { // If on a product taxonomy archive (category or tag)
+                            $args = array(
+                                'post_type' => 'product',
+                                'posts_per_page' => $per_page,
+                                'paged' => get_query_var( 'paged' ),
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy' => get_query_var( 'taxonomy' ),
+                                        'field'    => 'slug',
+                                        'terms'    => get_query_var( 'term' ),
+                                    ),
+                                ),
+                            );
+                        } else { // On main shop page
+                            $args = array(
+                                'post_type' => 'product',
+                                'orderby' => 'date',
+                                'order' => 'DESC',
+                                'posts_per_page' => $per_page,
+                                'paged' => get_query_var( 'paged' ),
+                            );
+						}
+						
+                        // Set the query
+                        $products = new WP_Query( $args );
+						// Standard loop
+						?>
+						<!-- <ul class="products d-flex  flex-sm-row flex-column flex-wrap list-none"> -->
+
+						<div class="row portfolio-container" data-aos="fade-up">
+					<?php
+
+					
+						if ( $products->have_posts() ) :
+
+							
+					while ( $products->have_posts() ) : $products->the_post();
+					//Get product gallery images
+					$attachment_ids = $product->get_gallery_image_ids();
+
+					foreach( $attachment_ids as $attachment_id ) {
+						$image_link = wp_get_attachment_url( $attachment_id );
+					}
+				
+										
+                                ?>
+								
+								<div class="col-lg-4 col-md-6 portfolio-item filter-app">
+									<div class="portfolio-wrap">
+										<img src="<?php echo the_post_thumbnail_url(); ?>" class="img-fluid" alt="product thumbnail">
+										<div class="portfolio-links">
+											<a href="<?php  echo $image_link ?>" data-gall="portfolioGallery" class="venobox w-100" title="Product Gallery"><i class="icofont-eye-alt"></i></a>
+										</div>
+									</div>
+									<a href="<?php echo $product->get_permalink();?>" class="shop-prod-title text-center">
+										<h4><?php echo $product->get_name();?></h4>
+										<div class="shop-prod-price"><?php echo $product->get_price_html();?></div>
+									</a>
+									<div class="shop-prod-links">
+										<a href="<?php echo   $product->add_to_cart_url() ?>"  data-toggle="tooltip" title="Add to Cart"><i class="bx bx-cart"></i></a>
+										<a href="portfolio-details.html" title="Wish List"  data-toggle="tooltip" title="Add to Wishing List"><i class="bx bx-heart"></i></a>
+					
+									</div>
+									
+								</div>
+								
+							
+                                <?php
+							endwhile;
+							?>
+							</div>
+							<?php
+                            wp_reset_postdata();
+                        endif;
+                    } else { // If not on archive page (cart, checkout, etc), do normal operations
+                        woocommerce_content();
+                    }
+                
+					
 					woocommerce_product_loop_start();
 
 					if ( wc_get_loop_prop( 'total' ) ) {
 						while ( have_posts() ) {
 							the_post();
-
+	
 							/**
 							 * Hook: woocommerce_shop_loop.
 							 */
@@ -115,6 +202,8 @@ get_header( 'shop' );
 					do_action( 'woocommerce_no_products_found' );
 					}
 					?>
+					</div>
+				</section>
 			</div>
 	</div><!-- /row -->
 </div><!-- /container -->

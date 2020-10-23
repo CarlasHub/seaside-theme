@@ -9,7 +9,8 @@ WooCommerce styles override
  * Shop tables
  */
 
-table.shop_table_responsive thead {
+
+/*table.shop_table_responsive thead {
     display: none;
 }
 

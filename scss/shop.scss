@@ -6,3 +6,26 @@
 .shop-items .woocommerce-Price-amount {
     font-size: 1rem;
 }
+
+.shop-prod-title {
+    color: darken(grey, 20%);
+    margin: 5px 10px;
+}
+
+.shop-prod-price {
+    color: darken(grey, 20%);
+}
+
+.shop-prod-links {
+    text-align: center;
+    i {
+        font-size: 28px;
+        text-align: center;
+        // color: $primary;
+        transition: 0.3s;
+        margin: 5px 10px;
+        &:hover,
+        &:focus,
+        &:visited {}
+    }
+}

@@ -21,10 +21,13 @@ get_header();
         <?php get_template_part( 'template-parts/section-portofolio'); ?>
         <?php get_template_part( 'template-parts/testimonials'); ?>
         <?php get_template_part( 'template-parts/teams'); ?>
+        <?php get_template_part( 'template-parts/product-showcase'); ?>
+
+   
         
         </main><!-- #main -->
     </div><!-- #primary -->
   
 <?php
-get_sidebar();
+
 get_footer();

@@ -226,6 +226,9 @@ if ( ! function_exists( 'seaside_woocommerce_header_cart' ) ) {
 	}
 }
 
+
+
+
 function woocommerce_template_loop_product_title() { 
     echo '<h4 class="woocommerce-loop-product__title">' . get_the_title() . '</h4>'; 
 } 

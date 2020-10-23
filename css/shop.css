@@ -3,3 +3,11 @@
 
 .shop-items .woocommerce-Price-amount {
   font-size: 1rem; }
+
+.shop-prod-links {
+  text-align: center; }
+  .shop-prod-links a i {
+    font-size: 28px;
+    text-align: center;
+    color: pink;
+    transition: 0.3s; }
