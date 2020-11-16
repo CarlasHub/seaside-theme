@@ -124,6 +124,10 @@ pre {
 
 a {
     background-color: transparent;
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
 }
 
 

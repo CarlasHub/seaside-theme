@@ -16,11 +16,12 @@
                   $args = array('post_type' => 'product');
                   $product_categories = get_terms('product_cat', $args);
                   $count = count($product_categories);
-
+              
                   if ($count > 0) {
                      foreach ($product_categories as $product_category) {
+                       
                   ?>
-                  <li data-filter=".<?php echo $product_category->name ?>"><?php echo $product_category->name ?></li>
+                  <li data-filter=".<?php echo $product_category->slug ?>"><?php echo $product_category->name ?></li>
                   <?php
                         }// foreach end
                      }
@@ -42,10 +43,11 @@
                $products->the_post();
          ?>
 
-         <div class="col-lg-4 col-md-6 portfolio-item <?php echo $product_category->name ?>">
+         <div class="col-lg-4 col-md-6 portfolio-item <?php echo $product_category->slug ?>">
           <div class="portfolio-wrap">
          
                <?php the_post_thumbnail(); ?> 
+             
                <div class="portfolio-links"> 
                   <a href="<?php bloginfo('template_url'); ?>/img/portfolio/portfolio-9.jpg" data-gall="portfolioGallery" class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
                   <a href="<?php echo get_permalink($products->post->ID) ?>" title="More Details"><i class="bx bx-link"></i></a>

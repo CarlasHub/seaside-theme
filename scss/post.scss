@@ -1,0 +1,24 @@
+.post-full-width {
+    .entry-header .entry-title {
+        font-size: 32px;
+        font-weight: bold;
+        position: relative;
+        margin-bottom: 30px;
+        color: #2f4d5a;
+        z-index: 2;
+        padding: 0;
+        margin: 0;
+    }
+    .entry-meta {
+        margin: 0.5rem 0;
+        font-size: 14px;
+        .posted-on,
+        .byline,
+        a {
+            color: $primary;
+            a:visited {
+                color: $primary;
+            }
+        }
+    }
+}

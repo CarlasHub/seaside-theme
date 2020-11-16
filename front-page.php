@@ -12,8 +12,8 @@
 get_header();
 ?>
   <div id="primary" class="content-area">
+  <?php get_template_part( 'template-parts/hero'); ?>
         <main id="main" class="site-main">
-        <?php get_template_part( 'template-parts/hero'); ?>
         <?php get_template_part( 'template-parts/section-about'); ?>
         <?php get_template_part( 'template-parts/section-services'); ?>
         <?php get_template_part( 'template-parts/section-counter'); ?>
